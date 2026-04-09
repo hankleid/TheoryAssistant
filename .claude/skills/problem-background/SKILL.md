@@ -1,5 +1,5 @@
 ---
-name: experiment-background
+name: problem-background
 description: "Reference knowledge about the V_Si cavity QED experiment: system, data file, optical transitions, possible physics."
 ---
 **Analysis goals**
@@ -19,14 +19,13 @@ description: "Reference knowledge about the V_Si cavity QED experiment: system, 
 - The excitation peak is present in the data, followed by the decay.
 - The measurement was integrated over X seconds.
 
-
 **Problem statement**
 Although we are certain to be measuring only one emitter, the lifetime data is not represented by a single exponential decay. Rather, there exists a kink, or bend, in the lifetime decay which indicates interesting physics may be present.
 
 The resulting lifetime measurement is in `experimental_data/lifetime_data.dat`. We preprocessed the data for you in `load_timeresolved_data`, so the onset of the excitation (start of the rise) is at t=0.
 
-**Additional considerations**
+There are many possible explanations for the interesting lifetime decay shape, especially because you only have one measurement to base your analysis on. This requires you to not only generate an exploratory list of possible Hamiltonian/Lindbladian systems to describe the system, but also creative ways of testing your hypothesis for each model.
+
+**IMPORTANT: Known Physical Restrictions**
 - Spectral diffusion may be present in this system, but the rate of spectral diffusion is unknown.
 - If a stable emitter is strongly coupled to a cavity, we would expect to see Rabi oscillations in the lifetime trace.
-
-There are many possible explanations for the interesting lifetime decay shape, especially because you only have one measurement to base your analysis on. This requires you to not only generate an exploratory list of possible Hamiltonian/Lindbladian systems to describe the system, but also creative ways of testing your hypothesis for each model.

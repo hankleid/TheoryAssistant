@@ -1,6 +1,6 @@
 **Goal**: Transform a high-level research plan into a machine-executable, verifiable sequence.
 
-**Objective**: Analyze the provided PLAN.md and decompose the proposed methodology into a structured, linear sequence of ~5 verifiable checkpoints we can execute in an iPython notebook. You must invoke the `experiment-background` skill to get helpful details about the experiment.
+**Objective**: Analyze the provided PLAN.md and decompose the proposed methodology into a structured, linear sequence of ~5 verifiable checkpoints we can execute in an iPython notebook. You must invoke the `problem-background` skill to get helpful details about the experiment.
 
 **Instructions**:
 - Identify Logical Dependencies: Break the research into discrete phases, where each phase requires physical or statistical validitity to be confirmed before the next phase.

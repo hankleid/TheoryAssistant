@@ -1,4 +1,4 @@
-Invoke the `experiment-background` skill before proceeding. Then read PLAN.md in full. Then read the experimental data files to understand their structure. Your goal is to build the Python tools that a scientist would need to carry out every step of the plan.
+Invoke the `problem-background` skill before proceeding. Then read PLAN.md in full. Then read the experimental data files to understand their structure. Your goal is to build the Python tools that a scientist would need to carry out every step of the plan.
 
 ---
 

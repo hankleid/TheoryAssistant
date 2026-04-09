@@ -18,6 +18,9 @@ full_planning_prompt = f"You are measuring unknown physics in a known experiment
 full_revise_plan_prompt = f"Read PLAN.md carefully in its entirety. Your task is to critically audit it on three axes and then revise it in-place. Do not summarize — edit PLAN.md directly to fix every problem you identify.\n\n---\n\n{revise_plan_prompt}"
 full_gen_tools_prompt = f"{gen_tools_prompt}\n\nSuggested Python modules: numpy, qutip, scipy.\n\nUse `conda activate 3p12` to use the right environment.\n\nAll your tools should go in LabAssistant/tools/."
 
+
+# LOGGING TOOLS
+
 def log(txt, path='log.txt'):
     with open(path, "a+") as f:
         f.write(txt)
@@ -216,11 +219,19 @@ async def start_agent(user_prompt):
 
 if '__name__' == '__main__':
     print("starting...")
+    # I recommend commenting out all steps except the one you are currently running, so that you can observe the agent one step at a time.
+    # Every time you run something, Claude Agent's intermedidate output is appended to the log.txt. You can read it to see the agent's thought process. It's helpful to have Claude Code summarize the log.txt for more clarity, if you want.
+
     asyncio.run(start_agent(full_planning_prompt))
     asyncio.run(start_agent(full_revise_plan_prompt))
     asyncio.run(start_agent(full_gen_tools_prompt))
-    # asyncio.run(start_agent(revise_tools_prompt))
     asyncio.run(start_agent(gen_exec_checkpoints_prompt))
     asyncio.run(start_agent(execute_phase_prompt))
-    # asyncio.run(start_agent(interpret_results_prompt))
+
+
+
+
+    # --------------------- steps currently not in use ---------------------------------------
+    ### asyncio.run(start_agent(revise_tools_prompt))
+    ### asyncio.run(start_agent(interpret_results_prompt))
 

@@ -1,6 +1,6 @@
-First invoke the `experiment-background` skill and read its contents carefully. Then proceed with the following task.
+First invoke the `problem-background` skill and read its contents carefully. Then proceed with the following task.
 
-You have just completed a multi-phase Hamiltonian/Lindbladian learning analysis on the experimental data (`experimental_data/`) described in the experiment-background skill.
+You have just completed a multi-phase Hamiltonian/Lindbladian learning analysis on the experimental data (`experimental_data/`) described in the problem-background skill.
 All results are in the analysis/ folder.
 
 Your task is to produce a final interpretive analysis report that is EXPLAINABLE and

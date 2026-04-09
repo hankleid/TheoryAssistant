@@ -2,9 +2,9 @@
 
 Work through every step of the plan as if you were a graduate student sitting down to implement it tomorrow. Flag and fix anything that is vague, underspecified, or would fail in practice.
 
-- **Computational feasibility.** IMPORTANT: Will this analysis conclude within 2 hours for an 8-core CPU machine? Prioritize evaluating as many models as possible -- instead, minimize the number of iterations/walkers/etc. necessary for converging results.
+- **Computational feasibility.** IMPORTANT: Will this analysis conclude within 2 hours for an 8-core CPU machine? Prioritize evaluating as many models as possible — minimize the number of basis states, time steps, or solver iterations necessary for converging results.
 
-- **Algorithm specification.** Every fitting step must name specific algorithms, not just a method category. Explain precisely how outputs of one stage seed the next.
+- **Method specification.** Every analytical or computational step must name specific techniques, not just a method category. Explain precisely how outputs of one stage seed the next.
 
 ---
 
@@ -12,9 +12,9 @@ Work through every step of the plan as if you were a graduate student sitting do
 
 Evaluate whether the plan is likely to yield a both a technically correct and scientifically interesting result.
 
-- **Signature distinctiveness.** For the final model, identify the specific observable feature that distinguishes it from others. Describe what that feature looks like quantitatively in the data. If two models produce nearly identical observables within the experimental noise, flag them as non-distinguishable and propose how to break the degeneracy.
+- **Signature distinctiveness.** For each candidate model, identify the specific theoretical prediction or observable that distinguishes it from others. Describe what that feature looks like quantitatively. If two models produce nearly identical predictions within physically reasonable parameter ranges, flag them as non-distinguishable and propose how to break the degeneracy — either analytically or by identifying a regime where the models differ.
 
-- **Definition of success.** State explicitly what a successful outcome looks like: what threshold on the plan's own model comparison metric constitutes a decisive result, what residual structure would indicate a poor fit, what parameter values would be inconsistent with prior literature. Without this, there is no way to determine when the analysis is complete.
+- **Definition of success.** State explicitly what a successful theoretical outcome looks like: what result on the plan's own model comparison criterion constitutes a decisive conclusion, what would indicate a poor or unphysical result, and what parameter values would be inconsistent with prior literature. Without this, there is no way to determine when the analysis is complete.
 
 ---
 
@@ -22,7 +22,7 @@ Evaluate whether the plan is likely to yield a both a technically correct and sc
 
 This is the most important axis. The plan must be something a peer reviewer would consider sound, reproducible, and fully explainable. It must not contain any opaque or unjustified step.
 
--**Physical validity.** Invoke the `experiment-background` skill, which lists **IMPORTANT: Known Physical Restrictions**. The plan MUST include a coherent strategy to account for such known physical restrictions in a helpful way. State how ALL physical restrictions will be accounted for in Step 2 of the plan.
+- **Physical validity.** Invoke the `problem-background` skill, which lists **IMPORTANT: Known Physical Restrictions**. The plan MUST include a coherent strategy to account for such known physical restrictions in a helpful way. State how ALL physical restrictions will be respected in Step 2 of the plan.
 
 -**No errors.** Proofread the plan for reasoning and/or physics errors and correct them.
 
@@ -36,4 +36,4 @@ This is the most important axis. The plan must be something a peer reviewer woul
 
 ---
 
-After completing all three audits, rewrite PLAN.md with all fixes incorporated. Preserve the existing structure and citations; do not delete content unless it is factually incorrect. All new claims must be cited. When searching for references, dispatch a `search-literature` subagent.Remember to keep the plan specific but concise; do not exceed more than ~5 pages.
+After completing all three audits, rewrite PLAN.md with all fixes incorporated. Preserve the existing structure and citations; do not delete content unless it is factually incorrect. All new claims must be cited. When searching for references, dispatch a `search-literature` subagent. Remember to keep the plan specific but concise; do not exceed more than ~5 pages.
