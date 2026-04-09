@@ -1,0 +1,95 @@
+First invoke the `experiment-background` skill and read its contents carefully. Then proceed with the following task.
+
+You have just completed a multi-phase Hamiltonian/Lindbladian learning analysis on the experimental data (`experimental_data/`) described in the experiment-background skill.
+All results are in the analysis/ folder.
+
+Your task is to produce a final interpretive analysis report that is EXPLAINABLE and
+INTERPRETABLE to a physicist who did not run the fitting pipeline. This means every
+number must be explained in physical terms, every conclusion must be traceable to
+specific data features, and uncertainty must be quantified.
+
+Work through the following in order. Save all outputs to analysis/phase_[N+1]/.
+
+────────────────────────────────────────────────────────────────
+SECTION 1 — Read and synthesize the full analysis record
+────────────────────────────────────────────────────────────────
+
+Read every phase_N_summary.md, every phase_N_results.json, and the full model
+ranking table from the final phase. Do not skip any phase. Take note of:
+- The winning model: its identity, parameter count, and fitted values
+- The runner-up models and their performance gaps
+- The remaining fit discrepancies of all models
+
+────────────────────────────────────────────────────────────────
+SECTION 2 — Finalize the ranked list of models
+────────────────────────────────────────────────────────────────
+
+Based on the findings, make sure the models are ranked fairly in the final list.
+Make sure the rankings took both 1) fit and 2) physical validity of parameters into account.
+
+For some more complex models which may rank higher than simpler models, check that the parameters are not fitted to ~0 (no contribution). If those cases exist, you must simplify the ranked list accordingly. E.g. a three particle model where the 3rd particle has 0 effect should be eliminated -- clearly the two particle model is more suitable.
+
+If there are any errors or discrepancies, re-arrange the list according to the correct ranking.
+
+────────────────────────────────────────────────────────────────
+SECTION 3 — Plain-language physical interpretation of the winning model
+────────────────────────────────────────────────────────────────
+
+Write a clear narrative explaining:
+1. What physical system the winning model describes, including all parameters.
+   - How does the observable you fit map to its respective Hamiltonian/Linbladian?
+2. What each fitted parameter means physically. For each parameter, state:
+   - Its physical interpretation in one sentence
+   - Whether the value is consistent with the literature range for this system and experiment (cite the relevant parameter bounds from PLAN.md and/or experiment-background)
+   - Whether the value is surprising and, if so, why
+3. What the lab experiment teaches us, and how to interpret the experiment results through the lens of the model and parameters it predicts.
+4. Consequences of this model for this experimental system not otherwise stated.
+
+────────────────────────────────────────────────────────────────
+SECTION 4 — Quantifying the residual floor and diagnosing model misspecification
+────────────────────────────────────────────────────────────────
+
+Even though you identified a best-fit model, is it really a good fit of the lab experiment?
+
+Quantify this precisely:
+- Determine a metric for "actually captures the system" 
+- Report this metric for all the models you fit
+- What would this metric be if the model was perfect? Explain the gap between that ideal number and the actual numbers.
+
+Then, as a physicist expert in this field, determine and enumerate the most plausible physical sources of the residual floor. 
+For each candidate, provide:
+  (a) A one-sentence physical explanation of the mechanism
+  (b) The qualitative signature it would produce in a 2D residual heatmap
+      (axis: time bin vs. cavity detuning step) — is it structured in time?
+      in detuning? both? neither?
+  (c) An estimate of its contribution to the metric established above.
+
+Be sure to establish why such sources of residuals pertain to this specific winning model as opposed to other models in the ranked list.
+
+────────────────────────────────────────────────────────────────
+SECTION 5 — Augmented model: absorb the residual floor with an extra term(s)
+────────────────────────────────────────────────────────────────
+
+Take the winning model and add the single most physically motivated extra term
+identified in Section 3. Implement and fit this augmented model. The goal is to quantify the effect of the residuals on the system compared to other terms in the model, and to provide some physical explanation.
+
+Choose the option (or combination) that is most physically motivated given the
+residual heatmap structure visible in the analysis outputs. Justify your choice.
+
+For the augmented model:
+  - Fit using the same analysis procedure you've been using.
+  - Report all the resulting key fitting metrics.
+  - Plot before-and-after comparisons to models you have already evaluated.
+  - Provide a physical interpretation.
+
+────────────────────────────────────────────────────────────────
+SECTION 5 — Final interpretive summary
+────────────────────────────────────────────────────────────────
+
+Write a self-contained, polished summary covering the previous sections. Use equations.
+
+────────────────────────────────────────────────────────────────
+OUTPUT REQUIREMENTS
+────────────────────────────────────────────────────────────────
+
+Save to analysis/phase_[N+1]/ (where N+1 is the next phase) all your work, just like the previous phases. The phase_[N+1]_summary.md must be readable as a standalone document.

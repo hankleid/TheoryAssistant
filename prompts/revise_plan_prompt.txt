@@ -1,0 +1,39 @@
+## Axis 1: Practical Actionability
+
+Work through every step of the plan as if you were a graduate student sitting down to implement it tomorrow. Flag and fix anything that is vague, underspecified, or would fail in practice.
+
+- **Computational feasibility.** IMPORTANT: Will this analysis conclude within 2 hours for an 8-core CPU machine? Prioritize evaluating as many models as possible -- instead, minimize the number of iterations/walkers/etc. necessary for converging results.
+
+- **Algorithm specification.** Every fitting step must name specific algorithms, not just a method category. Explain precisely how outputs of one stage seed the next.
+
+---
+
+## Axis 2: Scientific Interest and Discovery Potential
+
+Evaluate whether the plan is likely to yield a both a technically correct and scientifically interesting result.
+
+- **Signature distinctiveness.** For the final model, identify the specific observable feature that distinguishes it from others. Describe what that feature looks like quantitatively in the data. If two models produce nearly identical observables within the experimental noise, flag them as non-distinguishable and propose how to break the degeneracy.
+
+- **Definition of success.** State explicitly what a successful outcome looks like: what threshold on the plan's own model comparison metric constitutes a decisive result, what residual structure would indicate a poor fit, what parameter values would be inconsistent with prior literature. Without this, there is no way to determine when the analysis is complete.
+
+---
+
+## Axis 3: Scientific Rigor and Community Trustworthiness
+
+This is the most important axis. The plan must be something a peer reviewer would consider sound, reproducible, and fully explainable. It must not contain any opaque or unjustified step.
+
+-**Physical validity.** Invoke the `experiment-background` skill, which lists **IMPORTANT: Known Physical Restrictions**. The plan MUST include a coherent strategy to account for such known physical restrictions in a helpful way. State how ALL physical restrictions will be accounted for in Step 2 of the plan.
+
+-**No errors.** Proofread the plan for reasoning and/or physics errors and correct them.
+
+- **No arbitrary scoring.** The scoring system must be derived from a principled argument, not arbitrary rules. Novelty is perfectly fine, it just needs to be explainable.
+
+- **Assumption sensitivity.** Every analysis method contains tunable assumptions (hyperparameters, regularization choices, discretization decisions, or model selection criteria). How will you take this into consideration?
+
+- **Explainability statement.** Add a dedicated section or prominent paragraph — visible near the top of the plan — explaining why this analysis is not a black box. Every parameter must have a physical meaning that can be stated in one sentence. Every tunable setting in the inference procedure must be motivated by independent measurements or literature values. Novel methods must be grounded in literature based reasoning. A reader must be able to reproduce the full result from the plan + data + standard scientific software.
+
+- **Citation quality.** Every claim in the model library must be supported by a citation that specifically justifies that claim — not a general review or textbook cited for an entire category. Do a web search to verify that each citation is a real paper and that it actually contains the stated result. Replace vague citations with specific equation numbers or experimental results where possible.                               
+
+---
+
+After completing all three audits, rewrite PLAN.md with all fixes incorporated. Preserve the existing structure and citations; do not delete content unless it is factually incorrect. All new claims must be cited. When searching for references, dispatch a `search-literature` subagent.Remember to keep the plan specific but concise; do not exceed more than ~5 pages.

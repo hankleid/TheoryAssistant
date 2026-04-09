@@ -1,0 +1,17 @@
+First invoke the `experiment-background` skill and read its contents carefully. Then proceed with the following task.
+
+We are studying a system experimentally whose full physics is unknown. Our goal is to identify the physics Hamiltonian/Lindbladian system which fits the experimental data most accurately. Given the experimental background above, propose systematic methods for the following three steps. Do not fit ANY experimental data yet.
+
+1) **Exploring candidate Hamiltonion/Lindbladian models to evaluate.** Use the experimental background I provided, your own expertise, and resources from the internet to create your method. To help guide your search, think about what phenomena and properties we care about in the color center community. For example, number of emitters, coupling to cavity, potential exotic effects, etc.
+
+2) **Using the experimental data to fit all terms of each mathematical model.** You may look at the data files to decide how you will accomplish this step, but refrain from analyzing the data itself yet. The fitting method(s) should be rigorous and applicable to this setting. See the Known Physical Restrictions section of the `experimental-background` skill and state how you will accommodate these.
+
+3) **Evaluating each fit to determine a ranked list of all the candidate models.** What metric or scoring system will you use to quantify the fit and rank models? Invoke the `experiment-background` for more information regarding the physical system.
+
+**IMPORTANT**: It is ESSENTIAL that you include some strategy for assessing the physical validity of each fitted parameter in each model and weighing candidates accordingly. In other words, both the fit quality AND physical validity of parameters must be considered. Your steps 2) and 3) should be informed by this.
+
+For developing all 3 steps, you may do a literature search to get inspiration from how other research has accomplished this "Hamiltonian learning" or "model learning" from experiments before. Be sure to cite ALL your sources. If you create a novel method, it must be grounded. If you are proposing anything novel, state as such.
+
+Keep in mind the goal is to help researchers make scientific discoveries -- see the motivation of similar work done in the past.
+
+Your proposed methods for each step should be specific but concise. Spare no detail and share your entire thought process, but your plan should ultimately be straightforward to explain. Write your final plan for all three steps to "PLAN.md", which should not exceed more than ~5 pages.

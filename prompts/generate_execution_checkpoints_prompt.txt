@@ -1,0 +1,14 @@
+**Goal**: Transform a high-level research plan into a machine-executable, verifiable sequence.
+
+**Objective**: Analyze the provided PLAN.md and decompose the proposed methodology into a structured, linear sequence of ~5 verifiable checkpoints we can execute in an iPython notebook. You must invoke the `experiment-background` skill to get helpful details about the experiment.
+
+**Instructions**:
+- Identify Logical Dependencies: Break the research into discrete phases, where each phase requires physical or statistical validitity to be confirmed before the next phase.
+- Establish Deliverables: For each checkpoint, define what outputs are necessary before moving on to the next step.
+- Model Lattice Mapping: Structure the checkpoints to follow a compositional approach, moving from null/baseline models to increasing levels of structural or dynamical complexity.
+- Your Output Format: You must produce a JSON file named execution_checkpoints.json. Each entry should include:
+    - phase_id: A unique numerical ID.phase: The broad category of the task.
+    - task_description: A clear instruction of what to code or analyze.
+    - output: A description of what deliverables are required from this step in order to proceed to the next.
+
+Write the checkpoints to the file and nothing else.

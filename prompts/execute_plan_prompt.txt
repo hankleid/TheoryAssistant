@@ -1,0 +1,40 @@
+Objective: Identify the current progress of the discovery defined by your PLAN.md, implement the immediate next phase as a standalone Python script, and present all results of this phase.
+
+You must follow the workflow presented in `execution_checkpoints.json`. Always reference PLAN.md. Experimental details and helpful information can be found by invoking the `experiment-background` skill.
+
+All your work will be under the analysis/ folder.
+
+Step 1: State Audit
+- Review the existing phases and the `execution_checkpoints.json`.
+- Identify the first phase_id that does not yet have a corresponding complete phase_N folder.
+- IMPORTANT: Check the summary.md and determine if any more tests need to be run before starting the next phase. For example, did all results converge? Is all information present for the next phase? If not, you MUST complete the current phase.
+- When the phase is complete, explicitly state: "Current progress: Phase [N-1] complete. Now generating phase_[N]." And create the phase_[N]/ folder.
+
+Step 2: Script Implementation (phase_N.py)
+- All code should be compatible with the `3p12` conda environment.
+- In phase_[N]/ write a standalone Python script named phase_[N].py based on the task_description for that phase.
+- To maintain scientific consistency, you must use the tools outlined in your toolbox, located in the `tools/` folder.
+- Invoke the `experiment-background` skill to get hints on fitting data.
+- When fitting experimental data, make a few attempts to make sure you have the most faithful fit.
+
+Step 3: Performance Audit - IMPORTANT
+- The code must be EFFICIENT in time, and results MUST CONVERGE in a reasonable time (<2 hours maximum).
+- Explicitly enumerate all independent tasks in a comment at the top of the file. All independent tasks (e.g., fitting different models, processing different segments, running different configurations) must be dispatched concurrently using ProcessPoolExecutor or multiprocessing.Pool to minimize wall time. A sequential for-loop over independent tasks is never acceptable.
+- Before finalizing any depth or iteration parameters (e.g., number of steps, restarts, iterations, samples, or similar), you must first run a minimal timing probe: execute one representative unit of work (one task, one model, etc.) and measure its wall time. From that measurement, determine if the full computation will take less than 2 hours. Be conservative and assume tasks will take longer than you expect. Do not use plan-spec values blindly — treat them as upper bounds, not targets.
+- Reduce the depth, number of walkers, iterations, or similar parameters in order to reduce the time complexity. It's essential that the fitting CONVERGES.
+- You may edit the Python tools (`tools/`) to support vectorization,multithreading, etc. You must take a note if you make any changes.
+
+Step 4: Execution & Output Collection
+- You must check your code before running it. Make sure there are no variable name mismatches or other issues that would cause your code to crash after results converge.
+- Run the script using the terminal execution tool.
+- If the script is taking longer than 2 HOURS you MUST kill the process and review the code. Refer back to the Performance Audit (Step 3) and make changes.
+- Ensure the script saves the following into phase_[N]/:
+    - Figures: All diagnostic plots required by the PLAN.md (e.g. fits, residual heatmaps). ENSURE at least one figure superimposes the fits of all models onto the raw experimental data, for ease of human interpretation.
+    - Data: JSON or CSV files containing the fitted parameters and/or key results.
+    - Metadata: A runtime_log.txt capturing the execution time and any convergence warnings.
+    - Phase Report: A Markdown file named phase_[N]_summary.md that describes this phase, what you set out to do, and the result of this phase. Also list all the Python tools in `tools/` that you used.
+
+Step 5: Validation & Convergence
+    - Dispatch `validate-phase` as a subagent (Agent tool) passing the current phase number. Wait for its pass/fail report before deciding whether to re-run.
+    - Re-run anything that needs to be re-run.
+    - After, write a section called REMAINING TASKS, which itemizes any remaining tasks which must be completed in THIS PHASE, BEFORE executing the next phase. Did any results fail to converge? Do you want to re-run any models with different parameters to resolve any uncertainties? This section may be left empty if you are satisfied with the results. Or, you may provide an itemized list of remaining tasks in this section.
