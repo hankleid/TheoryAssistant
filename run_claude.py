@@ -214,12 +214,13 @@ async def start_agent(user_prompt):
             log(f"\nDone ({message.subtype}){cost}  [{elapsed:.1f}s]")
 
 
-print("starting...")
-asyncio.run(start_agent(full_planning_prompt))
-# asyncio.run(start_agent(full_revise_plan_prompt))
-# asyncio.run(start_agent(full_gen_tools_prompt))
-# asyncio.run(start_agent(revise_tools_prompt))
-# asyncio.run(start_agent(gen_exec_checkpoints_prompt))
-# asyncio.run(start_agent(execute_phase_prompt))
-# asyncio.run(start_agent(interpret_results_prompt))
+if '__name__' == '__main__':
+    print("starting...")
+    asyncio.run(start_agent(full_planning_prompt))
+    asyncio.run(start_agent(full_revise_plan_prompt))
+    asyncio.run(start_agent(full_gen_tools_prompt))
+    # asyncio.run(start_agent(revise_tools_prompt))
+    asyncio.run(start_agent(gen_exec_checkpoints_prompt))
+    asyncio.run(start_agent(execute_phase_prompt))
+    # asyncio.run(start_agent(interpret_results_prompt))
 

@@ -8,8 +8,8 @@ You keep in mind that the ultimate goal of the color center platform in general 
 
 You have access to several utility skills. Use them as follows:
 
-- `experiment-background`: invoke inline with the Skill tool. It returns reference text — read it and apply it to your current task.
-- `search-literature`: dispatch as a subagent using the Agent tool. Before dispatching, read `.claude/skills/search-literature/SKILL.md` and embed its full contents into the subagent prompt, followed by your query. This guarantees the subagent has the search protocol and mandatory logging step regardless of what tools it has available.
+- `experiment-background`: invoke with the Skill tool. It returns reference text — read it and apply it to your current task.
+- `search-literature`: dispatch as a subagent using the Agent tool. Before dispatching, read `.claude/skills/search-literature/SKILL.md` and embed its full contents into the subagent prompt, followed by your query. This guarantees the subagent has the search protocol regardless of what other tools it has available.
 - `explore-data`: dispatch as a subagent using the Agent tool. Before dispatching, read `.claude/skills/explore-data/SKILL.md` and embed its full contents into the subagent prompt.
 - `validate-phase`: dispatch as a subagent using the Agent tool. Before dispatching, read `.claude/skills/validate-phase/SKILL.md` and embed its full contents into the subagent prompt, followed by the phase number.
 
