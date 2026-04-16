@@ -1,6 +1,6 @@
-Objective: Identify the current progress of the discovery defined by your PLAN.md, implement the immediate next phase as a standalone Python script, and present all results of this phase.
+Objective: Identify the current progress of the theoretical investigation defined by your PLAN.md, implement the immediate next phase as a standalone Python script, and present all results of this phase.
 
-You must follow the workflow presented in `execution_checkpoints.json`. Always reference PLAN.md. Experimental details and helpful information can be found by invoking the `experiment-background` skill.
+You must follow the workflow presented in `execution_checkpoints.json`. Always reference PLAN.md. Physical background and helpful information can be found by invoking the `problem-background` skill.
 
 All your work will be under the analysis/ folder.
 
@@ -14,14 +14,14 @@ Step 2: Script Implementation (phase_N.py)
 - All code should be compatible with the `3p12` conda environment.
 - In phase_[N]/ write a standalone Python script named phase_[N].py based on the task_description for that phase.
 - To maintain scientific consistency, you must use the tools outlined in your toolbox, located in the `tools/` folder.
-- Invoke the `experiment-background` skill to get hints on fitting data.
-- When fitting experimental data, make a few attempts to make sure you have the most faithful fit.
+- Invoke the `problem-background` skill to get hints on physical constraints and relevant parameter regimes.
+- When computing theoretical results, verify convergence across a few representative parameter values before committing to a full sweep.
 
 Step 3: Performance Audit - IMPORTANT
 - The code must be EFFICIENT in time, and results MUST CONVERGE in a reasonable time (<2 hours maximum).
 - Explicitly enumerate all independent tasks in a comment at the top of the file. All independent tasks (e.g., fitting different models, processing different segments, running different configurations) must be dispatched concurrently using ProcessPoolExecutor or multiprocessing.Pool to minimize wall time. A sequential for-loop over independent tasks is never acceptable.
 - Before finalizing any depth or iteration parameters (e.g., number of steps, restarts, iterations, samples, or similar), you must first run a minimal timing probe: execute one representative unit of work (one task, one model, etc.) and measure its wall time. From that measurement, determine if the full computation will take less than 2 hours. Be conservative and assume tasks will take longer than you expect. Do not use plan-spec values blindly — treat them as upper bounds, not targets.
-- Reduce the depth, number of walkers, iterations, or similar parameters in order to reduce the time complexity. It's essential that the fitting CONVERGES.
+- Reduce the basis size, number of time steps, iterations, or similar parameters in order to reduce the time complexity. It's essential that the computation CONVERGES.
 - You may edit the Python tools (`tools/`) to support vectorization,multithreading, etc. You must take a note if you make any changes.
 
 Step 4: Execution & Output Collection
@@ -29,10 +29,10 @@ Step 4: Execution & Output Collection
 - Run the script using the terminal execution tool.
 - If the script is taking longer than 2 HOURS you MUST kill the process and review the code. Refer back to the Performance Audit (Step 3) and make changes.
 - Ensure the script saves the following into phase_[N]/:
-    - Figures: All diagnostic plots required by the PLAN.md (e.g. fits, residual heatmaps). ENSURE at least one figure superimposes the fits of all models onto the raw experimental data, for ease of human interpretation.
-    - Data: JSON or CSV files containing the fitted parameters and/or key results.
+    - Figures: All diagnostic plots required by the PLAN.md (e.g. spectra, phase diagrams, parameter sweeps). ENSURE at least one figure directly compares the key predictions of all models, for ease of human interpretation.
+    - Data: JSON or CSV files containing the computed observables, derived parameters, and/or key results.
     - Metadata: A runtime_log.txt capturing the execution time and any convergence warnings.
-    - Phase Report: A Markdown file named phase_[N]_summary.md that describes this phase, what you set out to do, and the result of this phase. Also list all the Python tools in `tools/` that you used.
+    - Phase Report: A Markdown file named phase_[N]_summary.md that describes this phase, what you set out to compute, and the theoretical results obtained. Also list all the Python tools in `tools/` that you used.
 
 Step 5: Validation & Convergence
     - Dispatch `validate-phase` as a subagent (Agent tool) passing the current phase number. Wait for its pass/fail report before deciding whether to re-run.
