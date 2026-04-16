@@ -3,7 +3,7 @@ Quick installation.
 1. Clone this repository.
 2. Edit `.claude/skills/problem-background/SKILL.md` with details of the problem you want the agent to help you solve. Include a clear problem statement and definition of success. The agent will always do a literature search on its own, but you may also include here specific knowledge you would like the agent to make use of. You may also wish to specify the level of rigor or process(es) you would like the agent to consider. The level of specificity of this document is up to the human scientist. Less information will result in a more exploratory agent, while more information is useful for a guided analysis.
 3. OPTIONAL: under `tools/` add your own Python tools you'd like the agent to use. You may leave it empty if you want the agent to make its own tools. If you have data files, it is helpful to include a tool which opens the files and extracts the data.
-4. Start running the agent in `claude_run.py`. Uncomment the line with the step you wish to run.
+4. Start running the agent in `run_claude.py`. Uncomment the line with the step you wish to run.
 
 The steps in `run_claude.py` include the following:
 1. **Create Plan**. The agent reads `.claude/skills/problem-background/SKILL.md`, conducts a thorough literature search, then arrives at a research plan. If you don't like the research plan the agent generates at this step, I recommend editing `.claude/skills/problem-background/SKILL.md` to refine the information/goals of the analysis then re-run this step. If there are some inaccuracies or mistakes in the plan, you may consider running the next step before restarting.
