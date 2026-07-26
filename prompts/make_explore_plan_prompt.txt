@@ -1,0 +1,15 @@
+First invoke the `problem-spec` skill and read its contents carefully. Then proceed with the following task.
+
+We are studying a physical system whose full theoretical description we seek to develop. Our goal is to construct a rigorous theoretical framework that explains the phenomena of interest, makes testable predictions, and connects to the broader literature. Given the problem-spec I provided, propose systematic methods for the following three steps.
+
+1) **Determine the relevance of this problem to the scientific community.** Use the problem-spec provided, your own expertise, and resources from the internet to identify the context surrounding this theoretical problem. Why is it important? Which disciplines would care about the result? What are consequences of all the different possible results of this theory? Be specific.
+
+2) **Formulate a short list (<= 5) of different initial approaches to the problem.** It's not always the case that the first strategy actually solves the problem, so let's identify some leading options. Use the problem-spec provided, your own expertise, and resources from the internet to identify which theoretical approaches are most likely to set up the rest of the derivation successfully. Ultimately (when the research plan is executed) you will explore the first few layers of all these approaches before settling on one.
+
+3) **Establish what will determine selection of the final approach.** Explain how you will execute the first few layers of each candidate approach. You shouldn't attempt the full approach, just up to a point where it seems promising or not. What is that point? What metrics or strategies will you use to judge the validity of all the approaches you're initially evaluating?
+
+For developing all 3 steps, you may do a literature search to get inspiration from how others have tackled similar theoretical problems. Be sure to cite ALL your sources. If you propose a novel method or model, state as such and ground it in the literature.
+
+Keep in mind the goal is to help researchers make scientific discoveries and deepen physical understanding -- see the motivation of similar theoretical work done in the past.
+
+Your proposed methods for each step should be specific but concise. Spare no detail and share your entire thought process, but your plan should ultimately be straightforward to explain. Write your final plan for all three steps to "EXPLORE_PLAN.md", which should not exceed more than ~5 pages.

@@ -1,0 +1,36 @@
+First invoke the `problem-spec` skill and read its contents carefully. Then read the existing EXPLORE_PLAN.md in full — this is the exploration plan you previously wrote, listing candidate approaches and the criteria for selecting among them.
+
+You have already executed the first few layers of each candidate approach from PLAN.md. That exploration left artifacts in the `init_exploration/`: scratch scripts, notebooks, derivation notes, intermediate figures, or results files. Before writing anything, review the contents of this intitial exploration and the main conclusions.
+
+---
+
+## Step 1: Audit the exploration
+
+Survey `init_exploration/` for everything produced while testing the candidate approaches. For EACH candidate approach named in EXPLORE_PLAN.md, determine:
+- What was actually attempted, and how far it got.
+- What worked: which physical predictions, scalings, or simplifications held up.
+- What failed or looked unpromising, and the specific technical or physical reason why (e.g. an approximation broke down, a symmetry killed the effect, a scaling was worse than a competing approach).
+- Any open questions the exploration left unresolved.
+
+## Step 2: Select the final approach
+
+Using the selection criteria EXPLORE_PLAN.md already committed to in its third step, decide which candidate approach (or combination) you will carry forward into the full derivation. This decision must be justified by concrete evidence recovered in Step 1, not by abstract reasoning alone. State explicitly:
+- Which approach was selected and why, citing the specific exploration artifact(s) that support the choice.
+- Which candidates were rejected and the specific evidence that ruled them out.
+- Whether anything from a rejected approach is still worth retaining as a secondary term or cross-check in the final model.
+
+You may run a further literature search to fill any gaps the exploration exposed (e.g. to check whether an unexpected scaling or degeneracy you found has a known explanation, or to source a technique needed for the next step). Cite all sources.
+
+## Step 3: Write the full research plan
+
+Write MAIN_PLAN.md with the complete derivation/analysis plan for the selected approach. This plan is what will actually be executed phase-by-phase, so it must be significantly more detailed and technically committed than the exploration plan was. Cover:
+
+1) **Final approach specification.** State the exact approach you will take and why. Is it a beginning-to-end approach or will subsequent steps of the approach depend on the previous steps? If the latter, how will you determine subsequent steps of the derivation in the moment? Include all implementation details.
+
+2) **Derivation and computational methodology.** Specify precisely how you will derive and verify predictions: which analytical techniques, their explicit domain of validity, and which domain numerical methods will cross-check the analytics. State how each methodology supports the problem stated in `problem-spec` and keeps the broader literature/community in mind. Explain precisely how the output of one derivation stage seeds the next.
+
+3) **Success criteria and comparison.** Define the quantity or finding that constitute the final result, what a decisive/interesting result looks like, what would indicate an unphysical or uninteresting result, and how the final result will be checked against literature benchmarks, your own tests, scalings, numerical/analytical checks, or whatever else will help you check the solution from every angle.
+
+Every parameter must have a physical meaning statable in one sentence. Every approximation must be justified by the exploration evidence or by literature, not asserted. Cite ALL sources; if you propose a novel method, state so explicitly and ground it in the literature.
+
+Write the plan to MAIN_PLAN.md. It should not exceed ~5 pages. Be specific but concise — spare no detail in your reasoning, but the final plan should read as straightforward to execute.

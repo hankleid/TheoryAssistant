@@ -6,17 +6,16 @@ from claude_agent_sdk import query, ClaudeAgentOptions, AssistantMessage, Result
 
 prompts_dir, tools_dir = "prompts", "tools"
 system_prompt = open(f'{prompts_dir}/system_prompt.txt', 'r').read()
-make_plan_prompt = open(f'{prompts_dir}/make_plan_prompt.txt', 'r').read()
+make_explore_plan_prompt = open(f'{prompts_dir}/make_explore_plan_prompt.txt', 'r').read()
+make_full_plan_prompt = open(f'{prompts_dir}/make_full_plan_prompt.txt', 'r').read()
 revise_plan_prompt = open(f'{prompts_dir}/revise_plan_prompt.txt', 'r').read()
-gen_tools_prompt = open(f'{prompts_dir}/generate_tools_prompt.txt', 'r').read()
-revise_tools_prompt = open(f'{prompts_dir}/revise_tools_prompt.txt', 'r').read()
-gen_exec_checkpoints_prompt = open(f'{prompts_dir}/generate_execution_checkpoints_prompt.txt', 'r').read()
-execute_phase_prompt = open(f'{prompts_dir}/execute_plan_prompt.txt').read()
-interpret_results_prompt = open(f'{prompts_dir}/interpret_results_prompt.txt').read()
+execute_theory_prompt = open(f'{prompts_dir}/execute_theory_prompt.txt', 'r').read()
+write_final_theory_prompt = open(f'{prompts_dir}/write_final_theory_prompt.txt', 'r').read()
 
-full_planning_prompt = f"You are measuring unknown physics in a known experimental system.\n\n{make_plan_prompt}"
-full_revise_plan_prompt = f"Read PLAN.md carefully in its entirety. Your task is to critically audit it on three axes and then revise it in-place. Do not summarize — edit PLAN.md directly to fix every problem you identify.\n\n---\n\n{revise_plan_prompt}"
-full_gen_tools_prompt = f"{gen_tools_prompt}\n\nSuggested Python modules: numpy, qutip, scipy.\n\nUse `conda activate 3p12` to use the right environment.\n\nAll your tools should go in LabAssistant/tools/."
+full_revise_plan_prompt = f"Read MAIN_PLAN.md carefully in its entirety. Your task is to critically audit it on three axes and then revise it in-place. Do not summarize — edit MAIN_PLAN.md directly to fix every problem you identify.\n\n---\n\n{revise_plan_prompt}"
+execute_explore_prompt = f"First read EXPLORE_PLAN.md in its entirety. This is the blueprint for the following analysis. {execute_theory_prompt}"
+execute_main_plan_prompt = f"First read MAIN_PLAN.md in its entirety. This is the blueprint for the following analysis. {execute_theory_prompt}"
+
 
 
 # LOGGING TOOLS
@@ -217,21 +216,14 @@ async def start_agent(user_prompt):
             log(f"\nDone ({message.subtype}){cost}  [{elapsed:.1f}s]")
 
 
-if '__name__' == '__main__':
+if __name__ == '__main__':
     print("starting...")
-    # I recommend commenting out all steps except the one you are currently running, so that you can observe the agent one step at a time.
-    # Every time you run something, Claude Agent's intermedidate output is appended to the log.txt. You can read it to see the agent's thought process. It's helpful to have Claude Code summarize the log.txt for more clarity, if you want.
+    asyncio.run(start_agent(make_explore_plan_prompt))
+    asyncio.run(start_agent(execute_explore_prompt))
 
-    asyncio.run(start_agent(full_planning_prompt))
+    asyncio.run(start_agent(make_full_plan_prompt))
     asyncio.run(start_agent(full_revise_plan_prompt))
-    asyncio.run(start_agent(full_gen_tools_prompt))
-    asyncio.run(start_agent(gen_exec_checkpoints_prompt))
-    asyncio.run(start_agent(execute_phase_prompt))
+    asyncio.run(start_agent(execute_explore_prompt))
 
-
-
-
-    # --------------------- steps currently not in use ---------------------------------------
-    ### asyncio.run(start_agent(revise_tools_prompt))
-    ### asyncio.run(start_agent(interpret_results_prompt))
+    asyncio.run(start_agent(write_final_theory_prompt))
 

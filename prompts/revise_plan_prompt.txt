@@ -2,7 +2,7 @@
 
 Work through every step of the plan as if you were a graduate student sitting down to implement it tomorrow. Flag and fix anything that is vague, underspecified, or would fail in practice.
 
-- **Computational feasibility.** IMPORTANT: Will this analysis conclude within 2 hours for an 8-core CPU machine? Prioritize evaluating as many models as possible — minimize the number of basis states, time steps, or solver iterations necessary for converging results.
+- **Computational feasibility.** IMPORTANT: Is each individual derivation/simulation step scoped so it can converge in a reasonable time on an 8-core machine? Minimize the number of basis states, time steps, or solver iterations necessary for converging results — treat plan-stated values as upper bounds to be probed and reduced during execution, not fixed targets.
 
 - **Method specification.** Every analytical or computational step must name specific techniques, not just a method category. Explain precisely how outputs of one stage seed the next.
 
@@ -12,9 +12,9 @@ Work through every step of the plan as if you were a graduate student sitting do
 
 Evaluate whether the plan is likely to yield a both a technically correct and scientifically interesting result.
 
-- **Signature distinctiveness.** For each candidate model, identify the specific theoretical prediction or observable that distinguishes it from others. Describe what that feature looks like quantitatively. If two models produce nearly identical predictions within physically reasonable parameter ranges, flag them as non-distinguishable and propose how to break the degeneracy — either analytically or by identifying a regime where the models differ.
+- **Signature distinctiveness.** Identify the specific theoretical prediction or observable that makes the selected approach worth reporting — what would a reader who already knows the standard/literature protocols learn from this result? If the plan retains a secondary term or variant from a rejected candidate, state precisely what regime or feature it's meant to resolve, and how you'll tell whether it actually mattered or was fitted to ~0 contribution.
 
-- **Definition of success.** State explicitly what a successful theoretical outcome looks like: what result on the plan's own model comparison criterion constitutes a decisive conclusion, what would indicate a poor or unphysical result, and what parameter values would be inconsistent with prior literature. Without this, there is no way to determine when the analysis is complete.
+- **Definition of success.** State explicitly what a successful theoretical outcome looks like: what result on the plan's own success criteria (Step 3) constitutes a decisive conclusion, what would indicate a poor or unphysical result, and what parameter values would be inconsistent with prior literature. Without this, there is no way to determine when the analysis is complete.
 
 ---
 
@@ -22,18 +22,20 @@ Evaluate whether the plan is likely to yield a both a technically correct and sc
 
 This is the most important axis. The plan must be something a peer reviewer would consider sound, reproducible, and fully explainable. It must not contain any opaque or unjustified step.
 
-- **Physical validity.** Invoke the `problem-background` skill, which lists **IMPORTANT: Known Physical Restrictions**. The plan MUST include a coherent strategy to account for such known physical restrictions in a helpful way. State how ALL physical restrictions will be respected in Step 2 of the plan.
+- **Physical validity.** Invoke the `problem-spec` skill and confirm every physical restriction and constraint it states — fixed constants, conserved quantities, parameter bounds, the validity domain required for any approximation it calls for, etc. — is explicitly accounted for in Step 2 of the plan, not merely assumed.
 
 -**No errors.** Proofread the plan for reasoning and/or physics errors and correct them.
 
-- **No arbitrary scoring.** The scoring system must be derived from a principled argument, not arbitrary rules. Novelty is perfectly fine, it just needs to be explainable.
+- **No arbitrary scoring.** Any comparison or success criterion must be derived from a principled argument, not arbitrary rules. Novelty is perfectly fine, it just needs to be explainable.
 
-- **Assumption sensitivity.** Every analysis method contains tunable assumptions (hyperparameters, regularization choices, discretization decisions, or model selection criteria). How will you take this into consideration?
+- **Assumption sensitivity.** Every analysis method contains tunable assumptions (approximation regimes, discretization decisions, truncation choices, or comparison criteria). How will you take this into consideration?
 
-- **Explainability statement.** Add a dedicated section or prominent paragraph — visible near the top of the plan — explaining why this analysis is not a black box. Every parameter must have a physical meaning that can be stated in one sentence. Every tunable setting in the inference procedure must be motivated by independent measurements or literature values. Novel methods must be grounded in literature based reasoning. A reader must be able to reproduce the full result from the plan + data + standard scientific software.
+- **Explainability statement.** Add a dedicated section or prominent paragraph — visible near the top of the plan — explaining why this analysis is not a black box. Every parameter must have a physical meaning that can be stated in one sentence. Every tunable setting must be motivated by independent reasoning or literature values. Novel methods must be grounded in literature-based reasoning. A reader must be able to reproduce the full result from the plan + `tools/` + standard scientific software.
 
-- **Citation quality.** Every claim in the model library must be supported by a citation that specifically justifies that claim — not a general review or textbook cited for an entire category. Do a web search to verify that each citation is a real paper and that it actually contains the stated result. Replace vague citations with specific equation numbers or experimental results where possible.                               
+- **Citation quality.** Every claim in the final approach specification must be supported by a citation that specifically justifies that claim — not a general review or textbook cited for an entire category. Do a web search to verify that each citation is a real paper and that it actually contains the stated result. Replace vague citations with specific equation numbers or experimental results where possible.
 
 ---
 
-After completing all three audits, rewrite PLAN.md with all fixes incorporated. Preserve the existing structure and citations; do not delete content unless it is factually incorrect. All new claims must be cited. When searching for references, dispatch a `search-literature` subagent. Remember to keep the plan specific but concise; do not exceed more than ~5 pages.
+Run this only once MAIN_PLAN.md has been written — after exploration and the selection of the final approach, before execution of the full derivation begins.
+
+After completing all three audits, rewrite MAIN_PLAN.md with all fixes incorporated. Preserve the existing structure and citations; do not delete content unless it is factually incorrect. All new claims must be cited. When searching for references, dispatch a `search-literature` subagent. Remember to keep the plan specific but concise; do not exceed more than ~5 pages.

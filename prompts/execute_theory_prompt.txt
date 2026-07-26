@@ -1,0 +1,78 @@
+First invoke the `problem-spec` skill and read its contents carefully.
+
+You decide, moment to moment, what to investigate next based on the plan's stated goals/candidates/success criteria and your own judgment as a theorist. Now that you can write your own tools (`build-tools` skill), the work is nonlinear: you may derive, simulate, backtrack, and revisit earlier threads in whatever order actually makes progress. What must NOT be nonlinear is the record you leave behind — every session, including this one, must be reconstructable by a human or by you-in-a-later-session without re-deriving anything.
+
+---
+
+## The standard: four artifacts, updated continuously
+
+Everything you do lives in exactly one of these four places: `notes/`, `data/`, and `summary.md` at the end. Never let work exist only in your own reasoning — if it isn't in one of these, it didn't happen.
+
+### 1. `log.jsonl` — every move, no matter how small
+
+Append one line of JSON per discrete action, immediately when you take it (not batched at the end of a session). One object per line:
+
+```
+{"ts": "2026-07-25T18:03:11Z", "action": "build_tool", "detail": "extended tools/effective_models.py with reduce_to_effective_theory(); generalized to N particles", "files": ["tools/effective_models.py"]}
+```
+
+`action` is one of:
+- `direction` — starting to investigate a specific idea, sub-question, or candidate approach
+- `derive` — an analytical derivation step
+- `simulate` — running a numerical computation
+- `build_tool` — invoking `build-tools` to create or extend something in `tools/`
+- `lit_search` — dispatching `search-literature`
+- `note` — writing a new file in `notes/`
+- `data` — saving a new file in `data/`
+- `decision` — a judgment call: ruling an approach in/out, choosing between two methods, abandoning a direction
+- `self_check` — dispatching `self-check` to independently verify a derivation, tool, or claim
+
+This log is the paper trail — a human should be able to `tail -f log.jsonl` and understand what you're doing without reading a single note.
+
+### 2. `notes/` — one file per sub-investigation that reaches an understanding
+
+Whenever you finish a sub-process and land on a conclusion (positive or negative — "this doesn't work" is as valuable a note as "this works"), write `notes/NNN_short-slug.md` (zero-padded sequence number, e.g. `notes/003_approximation-validity-check.md`). Each note is a self-contained lab notebook entry:
+
+```markdown
+# <Title>
+**Motivated by:** which item in the plan (candidate approach / derivation thread / open question) this addresses
+**What I did:** the specific method, derivation, or computation
+**Result:** the concrete outcome — numbers, scalings, a fit, a counterexample
+**Physical interpretation:** what this means for the system, in plain physical terms
+**Evidence:** links to the specific files in data/ and tools/ that back this up
+**Open questions / next steps:** what remains unresolved because of this finding
+```
+
+Do not write a note for trivial mechanical steps (e.g. "fixed a typo"). Write one whenever you reach a conclusion someone else would need to know to avoid re-deriving it.
+
+### 3. `data/` — every generated artifact
+
+Every figure, results file, or intermediate dataset goes in `data/`, prefixed with the sequence number of the note that produced or discusses it (e.g. `data/003_observable_vs_parameter.png`, `data/003_results.json`). This makes the note ↔ data correspondence trivial to find without a separate manifest. Never leave a figure or results file only inside a scratch script's output — if it mattered enough to look at, it belongs in `data/`.
+
+### 4. `summary.md` — a living document, not a final report
+
+Write this file at the end of the session. It should be a detailed document explaining what you attempted and why, how you executed it, what artifacts it produced, and the main findings. Report what you've discovered and contextualize the findings. Be specific. Did you prove or disprove anything? What are your recommendations for the next step?
+
+This file is what the NEXT stage (or a human) will read first. Write it so that someone could make the next decision from `summary.md` alone, using the linked notes only to verify.
+
+---
+
+## Before writing any code
+
+Invoke the `build-tools` skill. Do not write ad hoc scripts that duplicate what a tool should be — see that skill for the standard tools must meet (generic interfaces, physical sanity checks baked in, promoted into `tools/` rather than left as scratch code).
+
+## Computational discipline
+
+Before scaling up any computation (basis size, sweep resolution, sample count, solver iterations), run a timing probe on one representative unit of work and confirm the full run will finish in a reasonable time — treat ~2 hours as an outer bound, not a target, and be conservative. If a set of tasks are independent (different parameter points, different candidate models, different segments), dispatch them concurrently (`ProcessPoolExecutor` or equivalent) — a serial loop over independent work is never acceptable. Verify convergence on a few representative parameter values before committing to a full sweep, and record convergence behavior in the relevant note.
+
+## Checking your own work
+
+Whenever you want to double-check a piece of algebra, a chain of reasoning, a tool's implementation, or whether a new finding is actually consistent with an earlier note, dispatch the `self-check` skill as a subagent (Agent tool), embedding its SKILL.md contents followed by exactly what to check (a note ID, an equation, a tool function, a claim in `summary.md`). Use it liberally — before committing a surprising result to `summary.md`, before ruling an approach out, or any time something feels uncertain. Log every dispatch as a `self_check` action, and record its verdict in the relevant note.
+
+## Physical rigor
+
+Respect every physical restriction in the `problem-spec` at all times (e.g. fixed physical constants, stated parameter bounds, the validity domain of any approximation it requires). Whenever you rely on an approximation, state its domain of validity and how you confirmed you're inside it — this belongs in the note for that investigation, not only in your own reasoning. Use `search-literature` opportunistically whenever you need to check a scaling, ground an approximation, or verify a claim; cite what you find in the relevant note.
+
+## When to consider this session's work done
+
+Check current status against the plan's success/selection criteria.
