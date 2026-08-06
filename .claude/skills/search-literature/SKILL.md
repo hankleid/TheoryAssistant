@@ -10,15 +10,46 @@ Search for and thoroughly read physics papers relevant to: **$ARGUMENTS**
 
 ## Search Protocol
 
-A `paperclip` MCP server is connected to this project (`claude mcp list` shows it as `paperclip`). It gives direct, structured access to arXiv full text as a virtual filesystem, and should be your primary retrieval path. Its tools are deferred — if they don't already appear as callable tools, run `ToolSearch` with a query like `"paperclip search"` or `"paperclip cat"` to load their schemas before calling them.
+A `paperclip` MCP server is connected to this project (`claude mcp list` shows it as `paperclip`). It gives direct, structured access to arXiv full text as a virtual filesystem, and should be your primary retrieval path. Its tools are deferred — if they don't already appear as callable tools, run `ToolSearch` with a query like `"paperclip search"` or `"paperclip cat"` to load their schema before calling them. That single load is all the discovery you need — do not follow it with a probing call to see what the tool accepts.
+
+### Paperclip command reference — call these directly, verbatim
+
+There is exactly one tool, `mcp__paperclip__paperclip`, which takes a single string
+argument: a command line, in the style of a shell, with one of the verbs below.
+There is no `skill`/`help`/`--help` verb — calling it with `skill` (or any bare
+discovery command) is not a real usage and will always fail with "Failed to fetch
+skill documentation from server." This entire reference is the documentation; do not
+spend a call rediscovering it.
+
+- `search -s arxiv "<natural language query>" -n 10` — search the arXiv corpus. Returns
+  up to 10 hits (title, authors, arXiv id, DOI, one-line summary) and a session id
+  (e.g. `s_ae62663c`) you can reuse with `map` (below).
+- `lookup arxiv <ARXIV_ID>` — direct lookup when you already know the id (e.g.
+  `lookup arxiv 2602.16067`). Use this instead of `search` whenever an id is known.
+- `ls /papers/arx_<id>/` — list what's available for a paper (top-level: `meta.json`,
+  `content.lines`, `sections/`).
+- `cat /papers/arx_<id>/content.lines` — full text, line-numbered. Add `--full` (i.e.
+  `cat --full /papers/arx_<id>/content.lines`) when the plain `cat` result looks
+  truncated — full papers can be long, and `--full` is what actually returns the
+  complete text (a bare `cat` can come back short).
+- `cat /papers/arx_<id>/sections/<Section Name>.lines` — jump straight to one section
+  on long papers, e.g. `cat --full "/papers/arx_2602.16067/sections/3. Ladder
+  dissipators.lines"` (quote the path when the section name has spaces).
+- `grep "<pattern>" /papers/arx_<id>/content.lines` — locate a claim/equation instead
+  of reading the whole file. Supports `-i` (case-insensitive), `-C <n>` (context
+  lines), and `\|`-alternation for multiple terms in one pass, e.g.
+  `grep -i "friger\|commutant\|attractiv" /papers/arx_0710.5385/content.lines -C 2`.
+- `map --from <session_id> "<question>"` — ask a question across all results of a
+  prior `search` call at once (the session id is printed after every `search`), e.g.
+  `map --from s_ae62663c "which of these give an explicit convergence rate?"`.
 
 Follow this priority order strictly for every paper you retrieve:
 
-1. **Search Paperclip's arXiv corpus.** Use the paperclip search tool scoped to the arXiv source (equivalent to `search -s arxiv "<query>" -n 10`) with a natural-language query. If you already know the arXiv ID, use the lookup tool instead (equivalent to `lookup arxiv <ARXIV_ID>`).
+1. **Search Paperclip's arXiv corpus** with `search` (unknown id) or `lookup` (known id) — see the command reference above.
 
-2. **Read the full text with the paperclip cat tool.** Each paper is addressed as `/papers/arx_<id>/content.lines` (full text, line-numbered) or `/papers/arx_<id>/sections/<Name>.lines` (e.g. `Methods.lines`, `Results.lines`) to jump straight to a relevant section on long papers. This replaces fetching `arxiv.org/html` or ar5iv — it returns real full text directly.
+2. **Read the full text with `cat`** — `/papers/arx_<id>/content.lines` for the whole paper, or `/papers/arx_<id>/sections/<Name>.lines` (e.g. `Methods.lines`, `Results.lines`) to jump straight to a relevant section on long papers; `ls /papers/arx_<id>/` first if you're unsure what sections exist. This replaces fetching `arxiv.org/html` or ar5iv — it returns real full text directly.
 
-3. **Locate specific claims or equations with the paperclip grep tool**, e.g. against `/papers/arx_<id>/content.lines`, instead of re-reading the whole file.
+3. **Locate specific claims or equations with `grep`** against `/papers/arx_<id>/content.lines` instead of re-reading the whole file.
 
 4. **Fallback — only if step 1 finds nothing for the paper or topic** (Paperclip's arXiv corpus is large but not exhaustive), fall back to the manual chain below:
    1. **Use `WebSearch` to find paper titles and arXiv IDs.** Search Google with natural language queries like `"Tavis-Cummings disorder cavity QED arXiv"`. Run multiple searches with varied phrasing to broaden coverage.

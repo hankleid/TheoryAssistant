@@ -1,0 +1,7 @@
+## Breadth first, not depth first
+
+`EXPLORE_PLAN.md` lists several candidate approaches on purpose — the point of this stage is to find out which one is worth committing to, not to fully develop the first one that starts producing interesting results. Any numerical stress-test approach exists to inform that choice. Producing a clean, well-verified result from one approach's first layer is a sign to move on and check the others. Writing an in-depth, complete theory is not appropriate at this stage.
+
+Before you spend more time deepening any one approach past the "first-layer" budget the EXPLORE_PLAN.md describes for it, stop and check that you have indeed evaluated the other approaches.
+
+When you do decide to stop deepening an approach (whether it looks promising or not), log that explicitly as a `decision` action, citing the specific criterion from `EXPLORE_PLAN.md` that triggered it, before moving to the next one.

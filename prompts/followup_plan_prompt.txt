@@ -1,0 +1,34 @@
+You have just executed `MAIN_PLAN.md`; each phase of that work is documented as a note under `main_derivation/notes/` (with raw data in `main_derivation/data/*.json`, figures in `main_derivation/figures/`, a synthesis in `main_derivation/summary.md`, and a full chronological action record in `main_derivation/log.jsonl`). Read `problem-spec.md`, `EXPLORE_PLAN.md`, `MAIN_PLAN.md`, and all of `main_derivation/` (and `init_exploration/` for earlier context) before doing anything else.
+
+Your task is to design a follow-up approach. This is a reflection-and-adjustment point, not
+a mandate to change course: the honest outcome may be "keep extending the current route, here's the
+next concrete step," "switch to a different route," or some mix. Use the following 4-step process:
+
+1. **Summarize.** In a new file `FOLLOWUP_PLAN.md`, write: a summary of `MAIN_PLAN.md`'s intended
+   approach, a phase-by-phase summary of what was actually accomplished and how (one paragraph per
+   phase, citing the relevant note file), and the final result as stated in `summary.md`.
+
+2. **Find the limitations.** Note any gaps, suspicious points, or nonidealities in the analysis.
+   Answer the following explicitly:
+   - Are there any numerical or computational search settings (bounds, tolerances, seed
+     counts, iteration limits, sample sizes) that, if widened or changed, could plausibly overturn a
+     negative/impossibility-type conclusion ("no X satisfies Y")? Were these actually stress-tested
+     across settings, or just run once?
+   - Is there a specific regime, parameter range, or special case that the derivation or its
+     supporting numerics failed to cover, or covered but left inconclusive?
+   - (IMPORTANT) Did the analysis fail to address any aspect of `problem-spec.md`?
+   - (IMPORTANT) Is the leading/adopted approach the *only* one that received sustained development? Is there any part of the `main_derivation/` you would like to pursue differently?
+   - (IMPORTANT) Is there any approach which you did not consider before whatsoever but now you identify as the most promising direction forward?
+   - (IMPORTANT) Was any previously-rejected approach rejected in the earlier `init_exploration/` step, but upon finalizing the `main_derivation/` would like to pursue futher?
+
+3. **Reflect on strategy — dispatch this as its own subagent, before designing anything.** Its job is
+   to genuinely weigh, without a predetermined conclusion, whether the best use of further effort is
+   (a) extending/deepening the current leading approach, (b) trying a route that shares little or no
+   machinery with it, or (c) some combination — and to argue the strongest case for whichever it
+   concludes, while fairly stating the case for the alternative(s) it didn't pick. Explicitly
+   re-litigate every approach rejected earlier in the project in light of everything learned since
+   `main_derivation/`. Record this reflection in `FOLLOWUP_PLAN.md` verbatim, followed by your own verdict on which points it raises are worth acting on.
+
+4. **Identify candidate next steps.** Informed by step 3, select your followup/next approach. Draw first on structure already visible in this project's own notes, data, and literature references that were noted; then dispatch a subagent with the `search-literature` skill to search further rather than relying only on what's already been found. Simply allocating more compute is not the answer; your followup/next approach should pursue a particular concept or effort. Like with the other PLANs, include specifics about your approach.
+
+When you are finished with the above 4 steps, stop and don't do any further analysis yet.

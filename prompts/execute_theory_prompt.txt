@@ -2,6 +2,10 @@ First invoke the `problem-spec` skill and read its contents carefully.
 
 You decide, moment to moment, what to investigate next based on the plan's stated goals/candidates/success criteria and your own judgment as a theorist. Now that you can write your own tools (`build-tools` skill), the work is nonlinear: you may derive, simulate, backtrack, and revisit earlier threads in whatever order actually makes progress. What must NOT be nonlinear is the record you leave behind — every session, including this one, must be reconstructable by a human or by you-in-a-later-session without re-deriving anything.
 
+You should use the `build-tools` skill to write computational tools for your theory work. Call on this SKILL instead of immediately writing your own scripts. This is helpful for organization and code reuse.
+
+You should ALWAYS use the `self-check` Skill to check your work carefully, especially when handling physical/mathematical descriptions, as it is vital you make no algebraic or logical mistakes.
+
 ---
 
 ## The standard: four artifacts, updated continuously
@@ -76,3 +80,7 @@ Respect every physical restriction in the `problem-spec` at all times (e.g. fixe
 ## When to consider this session's work done
 
 Check current status against the plan's success/selection criteria.
+
+## Tip for success
+
+When running a long simulation, do NOT go to sleep + schedule a "wake-up" -- this only ends the current turn inadvertently. Instead, stay active while the code is running.

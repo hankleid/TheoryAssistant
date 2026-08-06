@@ -1,30 +1,30 @@
-First invoke the `problem-spec` skill and read its contents carefully. Then read MAIN_PLAN.md in full, every file in `main_derivation/notes/` in sequence, `main_derivation/summary.md`, and the contents of `main_derivation/data/` and `tools/` that those notes reference. This is the entire record of the derivation you are about to write up. Do not rely on your own memory of doing the work — treat these artifacts as the sole source of truth, exactly as a reviewer who wasn't there would have to.
-
-Your task: write `main_derivation/theory.tex` — a complete, standalone, thorough theoretical writeup of the full investigation, from motivation through final results.
+Your task: write `{DIR}/theory.tex` — a complete, standalone, thorough theoretical writeup of the full investigation, from motivation through final results. Generate plot visualizations in `{DIR}/figures/` which help support the findings and illustrate the findings to a human reader.
 
 ---
 
 ## What theory.tex must contain
 
-1. **Motivation & context.** Grounded in `problem-spec` and the literature already gathered during derivation (cite it). Why this problem, why it matters, what question MAIN_PLAN.md set out to answer.
+1. **Motivation & context.** Grounded in `problem-spec` and the literature already gathered during derivation (cite it). Why this problem, why it matters, what question the plan set out to answer.
 
-2. **Model.** The exact framework actually used, per MAIN_PLAN.md's final specification.
+2. **Model.** The exact framework actually used, per the plan's final specification.
 
 3. **Derivation.** Reconstruct a final coherent derivation from the notes. Every equation must be traceable to the specific note that established it. State the explicit domain of validity for every approximation and assumption used, and how the notes confirmed the derivation stayed inside it.
 
-4. **Results.** Every quantitative finding (scalings, fitted exponents, fidelities, comparisons) with its source data file identified. Use pre-existing data, and/or make new data/plots that better illustrate the final theory more effectively. If you make new files, save them in `main_derivation/`.
+4. **Results.** Every quantitative finding (scalings, fitted exponents, fidelities, comparisons) with its source data file identified. Use pre-existing data, and/or make new `{DIR}/figures/` that better illustrate the final theory more effectively.
 
-5. **Discussion.** Compare results to literature; state plainly what's novel versus what confirms prior work. If MAIN_PLAN.md's own success criteria (its Step 3) were not fully met by the end of execution, say so explicitly — do not gloss over an inconclusive or negative result. 
+5. **Discussion.** Compare results to literature; state plainly what's novel versus what confirms prior work. If the plan's own success criteria were not fully met by the end of execution, say so explicitly — do not gloss over an inconclusive or negative result.
 
 6. **Conclusion.** The physical takeaway, and consequences to community that `problem-spec` addresses.
+
+7. **Plots.** in `{DIR}/figures/` make plots and visualizations which illustrate the findings or results. Make plots for all intermediate steps. Each plot should be clearly connected to the results/findings and help explain key concepts for human readers.
 
 ---
 
 ## Ground rules
 
-- Every claim in theory.tex must be traceable: either to a specific note/data file in `main_derivation/`, or to a specific literature citation verified via a `search-literature` dispatch — never cite a paper from memory.
-- If two notes disagree, or a later note supersedes an earlier one, resolve it using the LATER note's conclusion.
-- Do not pad, but do not compress either — this must be complete enough that a reader who has never seen `main_derivation/` could reproduce the result from theory.tex + `tools/` + the cited literature alone. Write it in the style of a typical theoretical derivation.
+- Every claim in theory.tex must be traceable: either to a specific note/data file in the derivation record you read above, or to a specific literature citation verified via a `search-literature` dispatch — never cite a paper from memory.
+- If two notes disagree, or a later note supersedes an earlier one, resolve it using the LATER note's conclusion — chronologically across the entire record you read, not just within a single stage.
+- Do not pad, but do not compress either — this must be complete enough that a reader who has never seen the derivation record could reproduce the result from theory.tex + `tools/` + the cited literature alone. Write it in the style of a typical theoretical derivation.
 
 ## Verification — self-check repeatedly, not once at the end
 
@@ -34,7 +34,7 @@ Writing up a derivation is exactly where transcription and reasoning errors cree
 - **Once per quantitative result or figure you cite** — confirm the number or plot you're about to write into theory.tex actually matches what's in the underlying data file, not a paraphrase of it.
 - **Once over the completed draft's overall internal consistency** — do the model in the Model section and the equations in the Derivation section actually agree with each other, and with the numbers claimed in Results?
 
-Log every dispatch as a `self_check` action in `main_derivation/log.jsonl`, exactly as during execution. If a self-check finds an issue, fix theory.tex before proceeding — if the underlying note itself was wrong, correct it and record why in a new note. Never write around a caught error or soften it in the prose.
+Log every dispatch as a `self_check` action in `{DIR}/log.jsonl`, exactly as during execution. If a self-check finds an issue, fix theory.tex before proceeding — if the underlying note itself was wrong, correct it and record why in a new note. Never write around a caught error or soften it in the prose.
 
 ## Final check
 
